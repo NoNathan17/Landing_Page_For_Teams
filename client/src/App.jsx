@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardBody,
   List,
-  ListItem
+  ListItem,
 } from "@chakra-ui/react";
 
 import api from "./api";
@@ -26,7 +26,7 @@ export default function App() {
     async function fetchTeam() {
       try {
         // IMPORTANT: change this to your real team name in Neon
-        const res = await api.get("/team/awesome-team");
+        const res = await api.get("/team/CLC");
         setTeam(res.data.team);
         setRoles(res.data.roles || {});
       } catch (err) {
@@ -52,9 +52,7 @@ export default function App() {
     return (
       <Container py={20} maxW="4xl" centerContent>
         <Heading size="md">Team not found</Heading>
-        <Text color="gray.500">
-          Check the team name in App.jsx and Neon.
-        </Text>
+        <Text color="gray.500">Check the team name in App.jsx and Neon.</Text>
       </Container>
     );
   }
@@ -62,7 +60,7 @@ export default function App() {
   // roles = { Developer: [...], Designer: [...], ... }
   const roleSections = Object.entries(roles).map(([title, members]) => ({
     title,
-    members
+    members,
   }));
 
   return (
@@ -109,11 +107,15 @@ export default function App() {
             <Heading size="lg">Goals</Heading>
           </CardHeader>
           <CardBody>
-            <List spacing={2}>
-              {/* TODO: Students replace */}
-              <ListItem>Goal 1</ListItem>
-              <ListItem>Goal 2</ListItem>
-              <ListItem>Goal 3</ListItem>
+            <List spacing={1}>
+              <ListItem fontWeight="bold">
+                Daily Appointment Quota Creation
+              </ListItem>
+              <ListItem fontWeight="bold">
+                Live Quota-Progress Tracking
+              </ListItem>
+              <ListItem fontWeight="bold">Version Logs</ListItem>
+              <ListItem fontWeight="bold">Tiered Permission Portals</ListItem>
             </List>
           </CardBody>
         </Card>
@@ -123,13 +125,24 @@ export default function App() {
 
       {/* ===== ROLE SECTIONS (LOOP THROUGH ALL DATA) ===== */}
       <VStack spacing={10} align="stretch">
-        {roleSections.map((section) => (
-          <RoleSection
-            key={section.title}       // unique per role section
-            title={section.title}     // e.g. "Developer"
-            members={section.members} // array of members
-          />
-        ))}
+        {roleSections
+          .sort((a, b) => {
+            const prioritized = ["Tech Lead", "Design Lead"];
+
+            const aLead = prioritized.includes(a.title);
+            const bLead = prioritized.includes(b.title);
+
+            if (aLead && !bLead) return -1;
+            if (!aLead && bLead) return 1;
+            return 0;
+          })
+          .map((section) => (
+            <RoleSection
+              key={section.title}
+              title={section.title}
+              members={section.members}
+            />
+          ))}
       </VStack>
     </Container>
   );
