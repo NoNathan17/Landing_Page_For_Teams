@@ -19,7 +19,7 @@ export default function RoleSection({ title, members }) {
         {title}
       </Heading>
 
-      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+      <SimpleGrid minChildWidth="250px" spacing={5}>
         {members.map((member) => {
           const baseName = `${member.first_name.toLowerCase()}-${member.last_name.toLowerCase()}`;
           const bgImages = `
@@ -32,38 +32,56 @@ export default function RoleSection({ title, members }) {
             <Card
               key={member.email}
               bgImage={bgImages}
-
               bgSize="cover"
               bgPos="center"
-              borderColor="#8CCD77"
-              borderWidth="2px"
-              textColor="#083A70"
+              borderWidth="1px"
               borderRadius="lg"
               overflow="hidden"
-              h="100%"
+              h="420px"
+              w="300px"
+              position="relative"
             >
-              <CardHeader>
+              <Box
+                as="img"
+                src={`/assets/${baseName}.jpg`}
+                onError={(e) => {
+                  e.target.src = `/assets/${baseName}.png`;
+                  e.target.onerror = () =>
+                    (e.target.src = `/assets/${baseName}.jpeg`);
+                }}
+                alt={`${member.first_name} ${member.last_name}`}
+                width="100%"
+                height="100%"
+                objectFit="cover" 
+                position="absolute"
+                top={0}
+                left={0}
+              />
+
+              {/* Overlay content on top of the image */}
+              <CardHeader position="relative" color="white" zIndex={1}>
                 <VStack align="start" spacing={1}>
                   <Heading size="md">
                     {member.first_name} {member.last_name}
                   </Heading>
-                  <Badge color="#8CCD77" px={2} py={1} borderRadius="md">
+                  <Badge
+                    bg="#8CCD77"
+                    color="black"
+                    px={2}
+                    py={1}
+                    borderRadius="md"
+                  >
                     {title}
                   </Badge>
                 </VStack>
               </CardHeader>
 
-              <CardBody>
-                {member.pronouns && (
-                  <Text color="gray.600">{member.pronouns}</Text>
-                )}
-                {member.year_of_study && (
-                  <Text color="gray.600">{member.year_of_study} year</Text>
-                )}
-                <Text mt={2} fontSize="sm" color="blue.600">
-                  {member.email}
-                </Text>
-              </CardBody>
+              <Box
+                position="absolute"
+                inset={0}
+                bg="linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.85))"
+                zIndex={0}
+              />
             </Card>
           );
         })}
