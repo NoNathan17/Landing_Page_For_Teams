@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import CoverPage from "./CoverPage"
 import {
   Container,
   VStack,
@@ -17,16 +18,20 @@ import {
 import api from "./api";
 import RoleSection from "./components/RoleSection";
 
+
+
 export default function App() {
   const [team, setTeam] = useState(null);
   const [roles, setRoles] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const [showCover, setShowCover] = useState(true);
+
   useEffect(() => {
     async function fetchTeam() {
       try {
         // IMPORTANT: change this to your real team name in Neon
-        const res = await api.get("/team/awesome-team");
+        const res = await api.get("/team/CLC");
         setTeam(res.data.team);
         setRoles(res.data.roles || {});
       } catch (err) {
@@ -66,11 +71,15 @@ export default function App() {
   }));
 
   return (
+    <>
+    {showCover && <CoverPage onClose = {() => setShowCover(false)} />}
+
+    <div style={{display : showCover ? "none" : "block"}}>
     <Container py={10} maxW="7xl">
       {/* ===== TEAM HEADER ===== */}
       <VStack spacing={4} align="start" mb={10}>
-        <Heading size="2xl">{team.team_name}</Heading>
-        <Text fontSize="lg" color="gray.600">
+        <Heading size="2xl" color = "#083A70">{team.team_name}</Heading>
+        <Text fontSize="lg" color="#083A70">
           {team.description}
         </Text>
       </VStack>
@@ -83,8 +92,11 @@ export default function App() {
         <CardBody>
           <Text>
             {/* TODO: Students replace */}
-            We are a team of builders and designers working together to create a
-            meaningful product. Replace this with your team’s mission.
+            We are a motivated team of developers and designers working collaboratively to help CLC serve 
+            more patients across Orange County by improving scheduling efficiency and resource management. 
+            We are designing a standardized system to reduce manual workload and simplify onboarding in 
+            order to support sustainable growth for CLC while allowing them to focus more on patient care and 
+            higher level tasks.
           </Text>
         </CardBody>
       </Card>
@@ -132,5 +144,7 @@ export default function App() {
         ))}
       </VStack>
     </Container>
-  );
+    </div>
+    </>
+  ); 
 }
