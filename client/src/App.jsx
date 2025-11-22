@@ -26,7 +26,7 @@ export default function App() {
     async function fetchTeam() {
       try {
         // IMPORTANT: change this to your real team name in Neon
-        const res = await api.get("/team/awesome-team");
+        const res = await api.get("/team/CLC");
         setTeam(res.data.team);
         setRoles(res.data.roles || {});
       } catch (err) {
@@ -76,7 +76,13 @@ export default function App() {
       </VStack>
 
       {/* ===== ABOUT US SECTION ===== */}
-      <Card mb={8}>
+      <Card mb={8}
+              borderColor = "#8CCD77"
+              borderWidth="2px"
+              textColor = "#083A70"
+              borderRadius="lg"
+              overflow="hidden"
+              h="100%">
         <CardHeader>
           <Heading size="lg">About Us</Heading>
         </CardHeader>
@@ -85,26 +91,41 @@ export default function App() {
             {/* TODO: Students replace */}
             We are a team of builders and designers working together to create a
             meaningful product. Replace this with your team’s mission.
+
+            
           </Text>
         </CardBody>
       </Card>
 
       {/* ===== PROJECT + GOALS SECTION ===== */}
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={10}>
-        <Card>
+        <Card
+              borderColor = "#8CCD77"
+              borderWidth="2px"
+              textColor = "#083A70"
+              borderRadius="lg"
+              overflow="hidden"
+              h="100%">
           <CardHeader>
             <Heading size="lg">Project Overview</Heading>
           </CardHeader>
           <CardBody>
             <Text>
               {/* TODO: Students replace */}
-              Write 2–3 sentences describing your project and what problem it
-              solves.
+              This project focuses on a patient appointment quota tracker system helping call center staff with keeping track of 
+              patient intake. CLCHC currently faces issues such as overscheduling, inconsistent real-time communication, 
+              and a decentralized system across locations. This project is mainly meant to track and manage daily provider appointment goals consistently. 
             </Text>
           </CardBody>
         </Card>
 
-        <Card>
+        <Card
+              borderColor = "#8CCD77"
+              borderWidth="2px"
+              textColor = "#083A70"
+              borderRadius="lg"
+              overflow="hidden"
+              h="100%">
           <CardHeader>
             <Heading size="lg">Goals</Heading>
           </CardHeader>

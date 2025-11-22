@@ -22,8 +22,11 @@ export default function RoleSection({ title, members }) {
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
         {members.map((member) => (
             <Card
+
               key={member.email}
-              borderWidth="1px"
+              borderColor = "#8CCD77"
+              borderWidth="2px"
+              textColor = "#083A70"
               borderRadius="lg"
               overflow="hidden"
               h="100%"
@@ -39,10 +42,10 @@ export default function RoleSection({ title, members }) {
 
             <CardBody>
               {member.pronouns && (
-                <Text color="gray.600">Pronouns: {member.pronouns}</Text>
+                <Text color="#083A70">Pronouns: {member.pronouns}</Text>
               )}
               {member.year_of_study && (
-                <Text color="gray.600">Year: {member.year_of_study}</Text>
+                <Text color="#083A70">Year: {member.year_of_study}</Text>
               )}
               <Text mt={2} fontSize="sm" color="blue.600">
                 {member.email}
