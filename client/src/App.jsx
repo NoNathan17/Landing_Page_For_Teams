@@ -24,7 +24,7 @@ export default function App() {
     async function loadTeam() {
       try {
         // TODO: Change team name to YOUR team in Neon
-        const res = await api.get("/team/Team%20Polaris");
+        const res = await api.get("/team/your-team-name");
         setData(res.data);
       } catch (err) {
         console.error("Error fetching team:", err);
@@ -37,69 +37,35 @@ export default function App() {
     return (
       <Container py={20}>
         <Heading size="md">Loading team data...</Heading>
-        <Text mt={2}>Make sure your server is running and Neon is seeded.</Text>
+        <Text mt={2}>Make sure your server is running and your query is correct.</Text>
       </Container>
     );
   }
 
   const { team, roles } = data;
 
+  //Work inside of here, make it the way you want!
   return (
-    <Box minH="100vh" bg="gray.50">
-      <Container maxW="6xl" py={12}>
-        {/* HERO */}
-        <VStack spacing={4} align="start" py={10}>
-          <Heading size="2xl">{team.team_name}</Heading>
-          <Text fontSize="lg" color="gray.600">
-            {team.description}
-          </Text>
-          <Button colorScheme="purple">Join Us</Button>
-        </VStack>
+    <Container py={10} maxW="7xl">
+      <VStack spacing={6} align="start" mb={10}>
+        <Heading>{team.name}</Heading>
+        <Text fontSize="lg">{team.description}</Text>
+        <Button
+          as="a"
+          href={team.link}
+          colorScheme="teal"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View Team Page
+        </Button>
+      </VStack>
 
-        <Divider my={8} />
-
-        {/* ABOUT */}
-        <VStack align="start" spacing={3} py={6}>
-          <Heading size="lg">About Us</Heading>
-          <Card w="full">
-            <CardBody>
-              {/* TODO: Add 2-4 sentences about your team mission */}
-              <Text>
-                We are a student team focused on building impactful software.
-                Add your real mission here.
-              </Text>
-            </CardBody>
-          </Card>
-        </VStack>
-
-        {/* PROJECT + GOALS */}
-        <VStack align="start" spacing={3} py={6}>
-          <Heading size="lg">Project & Goals</Heading>
-          <Text>
-            {/* TODO: Explain what your team is building in 2–3 sentences */}
-            Our project aims to solve a real problem for our community.
-          </Text>
-          <List spacing={2} pl={4} styleType="disc">
-            {/* TODO: List 3 team goals */}
-            <ListItem>Ship a working MVP</ListItem>
-            <ListItem>Design a clean user experience</ListItem>
-            <ListItem>Support our users with documentation</ListItem>
-          </List>
-        </VStack>
-
-        <Divider my={8} />
-
-        {/* ROLE SECTIONS */}
-        <RoleSection title="Tech Leads" members={roles["Tech Lead"] || []} />
-        <RoleSection title="Designers" members={roles["Designer"] || []} />
-        <RoleSection title="Developers" members={roles["Developer"] || []} />
-
-        {/* FOOTER */}
-        <Divider my={8} />
-        <Text color="gray.500" fontSize="sm" py={6}>
-          © {new Date().getFullYear()} {team.team_name}. All rights reserved.
-        </Text>
-      </Container>
-    </Box>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+        {roles.map((role) => (
+          <RoleSection key={role.name} role={role} />
+        ))}
+      </SimpleGrid>
+    </Container>
   );
 }

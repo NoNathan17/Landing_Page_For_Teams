@@ -2,8 +2,8 @@
   "name": "team-landing",
   "private": true,
   "workspaces": [
-    "server",
-    "client"
+    "./server",
+    "./client"
   ],
   "scripts": {
     "dev": "concurrently \"yarn workspace server dev\" \"yarn workspace client dev\""

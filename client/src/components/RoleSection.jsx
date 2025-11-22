@@ -1,3 +1,6 @@
+//You can customize this component to change how each role section looks.
+//Feel free to add more Chakra UI components and styles as needed.
+import React from "react";
 import {
   Heading,
   SimpleGrid,
@@ -10,31 +13,28 @@ import {
   Box
 } from "@chakra-ui/react";
 
+//This component receives a title and members as props and displays them in a styled section.
+//Work on this component to customize how each role section looks!
 export default function RoleSection({ title, members }) {
   return (
-    <Box py={6}>
-      <Heading size="lg" mb={4}>{title}</Heading>
-      <SimpleGrid columns={[1, 2, 3]} spacing={6}>
-        {members.map((m) => (
-          <Card key={m.email} variant="outline">
+    <Box w="100%">
+      <Heading size="lg" mb={4}>
+        {title}
+      </Heading>
+      <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+        {members.map((member) => (
+          <Card key={member.id} borderWidth="1px" borderRadius="lg" overflow="hidden">
             <CardHeader>
-              <VStack align="start" spacing={1}>
-                <Heading size="md">
-                  {m.first_name} {m.last_name}
-                </Heading>
-                <Badge colorScheme="purple">{title.slice(0, -1)}</Badge>
+              <VStack align="start" spacing={2}>
+                <Heading size="md">{member.name}</Heading>
+                <Badge colorScheme="teal">{member.role}</Badge>
               </VStack>
             </CardHeader>
             <CardBody>
-              {m.pronouns && <Text>Pronouns: {m.pronouns}</Text>}
-              {m.year_of_study && <Text>Year: {m.year_of_study}</Text>}
-              <Text color="blue.500" mt={2}>{m.email}</Text>
+              <Text>{member.bio}</Text>
             </CardBody>
           </Card>
         ))}
-        {members.length === 0 && (
-          <Text color="gray.500">No members listed yet. Seed Neon!</Text>
-        )}
       </SimpleGrid>
     </Box>
   );

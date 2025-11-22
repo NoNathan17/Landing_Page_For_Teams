@@ -9,6 +9,7 @@ app.use(express.json());
 app.get("/", (req, res) => res.json({ ok: true }));
 
 // GET /api/team/:teamName
+// I already wrote this for you! You can modify it if you want to change the data structure.
 app.get("/api/team/:teamName", async (req, res) => {
   const { teamName } = req.params;
 
