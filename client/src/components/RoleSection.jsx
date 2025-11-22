@@ -32,9 +32,12 @@ export default function RoleSection({ title, members }) {
             <Card
               key={member.email}
               bgImage={bgImages}
+
               bgSize="cover"
               bgPos="center"
-              borderWidth="1px"
+              borderColor="#8CCD77"
+              borderWidth="2px"
+              textColor="#083A70"
               borderRadius="lg"
               overflow="hidden"
               h="100%"

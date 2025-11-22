@@ -76,14 +76,20 @@ export default function App() {
     <Container py={10} maxW="7xl">
       {/* ===== TEAM HEADER ===== */}
       <VStack spacing={4} align="start" mb={10}>
-        <Heading size="2xl" color = "#083A70">{team.team_name}</Heading>
-        <Text fontSize="lg" color="#083A70">
+        <Heading size="4xl" color = "#083A70">{team.team_name}</Heading>
+        <Text fontSize="xl" color="#083A70">
           {team.description}
         </Text>
       </VStack>
 
       {/* ===== ABOUT US SECTION ===== */}
-      <Card mb={8}>
+      <Card mb={8}
+          borderColor = "#8CCD77"
+          borderWidth="2px"
+          textColor = "#083A70"
+          borderRadius="lg"
+          overflow="hidden"
+          h="100%">
         <CardHeader>
           <Heading size="lg">About Us</Heading>
         </CardHeader>
@@ -101,20 +107,33 @@ export default function App() {
 
       {/* ===== PROJECT + GOALS SECTION ===== */}
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6} mb={10}>
-        <Card>
+        <Card
+              borderColor = "#8CCD77"
+              borderWidth="2px"
+              textColor = "#083A70"
+              borderRadius="lg"
+              overflow="hidden"
+              h="100%">
           <CardHeader>
             <Heading size="lg">Project Overview</Heading>
           </CardHeader>
           <CardBody>
             <Text>
               {/* TODO: Students replace */}
-              Write 2–3 sentences describing your project and what problem it
-              solves.
+              This project focuses on a patient appointment quota tracker system helping call center staff with keeping track of 
+              patient intake. CLCHC currently faces issues such as overscheduling, inconsistent real-time communication, 
+              and a decentralized system across locations. This project is mainly meant to track and manage daily provider appointment goals consistently. 
             </Text>
           </CardBody>
         </Card>
 
-        <Card>
+        <Card
+              borderColor = "#8CCD77"
+              borderWidth="2px"
+              textColor = "#083A70"
+              borderRadius="lg"
+              overflow="hidden"
+              h="100%">
           <CardHeader>
             <Heading size="lg">Goals</Heading>
           </CardHeader>

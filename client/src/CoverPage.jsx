@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Image, VStack, Heading, Button } from "@chakra-ui/react";
 
 export default function CoverPage({ onClose }) {
+  const [fadeOut, setFadeOut] = React.useState(false);
 
   return (
     <Box
@@ -12,6 +13,8 @@ export default function CoverPage({ onClose }) {
       h="100%"
       zIndex="9999"
       overflow="hidden"
+      transition="opacity 0.5s ease"
+      opacity={fadeOut ? 0 : 1}
     >
       {/* Background Image */}
       <Image
@@ -51,7 +54,10 @@ export default function CoverPage({ onClose }) {
           px={8}
           py={6}
           _hover={{ bg: "#eef2f7" }}
-          onClick={onClose}   // <-- hides the cover page
+          onClick={() => {
+            setFadeOut(true);
+            setTimeout(onClose, 500); // removes component after fade
+          }}
         >
           Learn More
         </Button>
